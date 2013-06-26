@@ -1,8 +1,9 @@
 ---
 layout: post
-category : 每日一题
-tagline: 筛法求N以内所有质数
-tags : [每日一题]
+title: 筛法求N以内所有质数
+description: 
+category: 面试笔试题
+tags: [每日一题]
 ---
 {% include JB/setup %}
 

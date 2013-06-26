@@ -1,12 +1,5 @@
 ---
 layout: post
-category : 每日一题
-tagline: 按层遍历二叉树
-tags : [每日一题]
----
-{% include JB/setup %}
----
-layout: post
 title: 按层遍历二叉树
 description: 
 category: 面试笔试题

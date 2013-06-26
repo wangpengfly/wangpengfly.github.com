@@ -2,7 +2,7 @@
 layout: post
 title: 循环右移数组
 description: 
-category: 技术
+category: 面试笔试题
 tags: [每日一题, 数组]
 ---
 {% include JB/setup %}

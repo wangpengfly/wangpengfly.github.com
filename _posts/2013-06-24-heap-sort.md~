@@ -2,7 +2,7 @@
 layout: post
 title: 堆排序
 description: 
-category: 技术
+category: 面试笔试题
 tags: [每日一题, 排序]
 ---
 {% include JB/setup %}

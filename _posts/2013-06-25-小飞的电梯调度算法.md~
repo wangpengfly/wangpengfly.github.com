@@ -1,8 +1,9 @@
 ---
 layout: post
-category : 每日一题
-tagline: 
-tags : [每日一题]
+title: 小飞的电梯调度
+description: 
+category: 面试笔试题
+tags: [每日一题]
 ---
 {% include JB/setup %}
 
