@@ -1,16 +1,9 @@
 ---
 layout: post
-category : 每日一题
-tagline: 
-tags : [每日一题]
----
-{% include JB/setup %}
----
-layout: post
 title: 编写正确的二分查找算法
 description: 
 category: 面试笔试题
-tags: [每日一题，二分查找]
+tags: [每日一题, 二分查找]
 ---
 {% include JB/setup %}
 
