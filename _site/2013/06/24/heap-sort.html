@@ -129,51 +129,51 @@ using namespace std;
 
 void printArr(int *arr, int n)  
 {  
-	for(int i = 1; i &lt;= n; i++)  
-	{  
-    	cout &lt;&lt; arr[i] &lt;&lt; &quot;\t&quot;;  
-	}  
-	cout &lt;&lt; endl;  
+		for(int i = 1; i &lt;= n; i++)  
+		{  
+    		cout &lt;&lt; arr[i] &lt;&lt; &quot;\t&quot;;  
+		}  
+		cout &lt;&lt; endl;  
 }  
 
 //最关键的函数，建堆的时候该函数自低向上  
 void maxHeapify(int *arr, int n, int index)  
 {  
-	if(arr == NULL || index &gt; n)  
-    	return;  
-	int maxIndex = index;  
-	int left = index * 2;  
-	int right = index * 2 + 1;  
-	if(left &lt;= n &amp;&amp; arr[left] &gt; arr[maxIndex])  
-    	maxIndex = left;  
-	if(right &lt;= n &amp;&amp; arr[right] &gt; arr[maxIndex])  
-    	maxIndex = right;  
+		if(arr == NULL || index &gt; n)  
+    		return;  
+		int maxIndex = index;  
+		int left = index * 2;  
+		int right = index * 2 + 1;  
+		if(left &lt;= n &amp;&amp; arr[left] &gt; arr[maxIndex])  
+    		maxIndex = left;  
+		if(right &lt;= n &amp;&amp; arr[right] &gt; arr[maxIndex])  
+    		maxIndex = right;  
 
-	if(maxIndex != index)  
-	{  
-    	swap(arr[index], arr[maxIndex]);  
-    	maxHeapify(arr, n, maxIndex);  
-	}  
+		if(maxIndex != index)  
+		{  
+    		swap(arr[index], arr[maxIndex]);  
+    		maxHeapify(arr, n, maxIndex);  
+		}  
 }  
 
 void makeHeap(int *arr, int n)  
 {  
-	for(int i = n / 2; i &gt;= 1; i--)  
-	{  
-    	maxHeapify(arr, n, i);  
-	}  
+		for(int i = n / 2; i &gt;= 1; i--)  
+		{  
+    		maxHeapify(arr, n, i);  
+		}  
 }  
 
 void heapSort(int *arr, int n)  
 {  
-	makeHeap(arr, n);  
-	printArr(arr, 10);  
-	for(int i = 1; i &lt; n; i++)  
-	{  
-    	swap(arr[1], arr[n - i + 1]);  
-    	maxHeapify(arr, n - i, 1);  
-    	printArr(arr, 10);  
-	}  
+		makeHeap(arr, n);  
+		printArr(arr, 10);  
+		for(int i = 1; i &lt; n; i++)  
+		{  
+    		swap(arr[1], arr[n - i + 1]);  
+    		maxHeapify(arr, n - i, 1);  
+    		printArr(arr, 10);  
+		}  
 }  </code></pre>
     <ul class="pager">
     

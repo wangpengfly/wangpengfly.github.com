@@ -4,7 +4,7 @@
  <title>wpandveil</title>
  <link href="http://wangpengfly.github.com/atom.xml" rel="self"/>
  <link href="http://wangpengfly.github.com"/>
- <updated>2013-07-01T09:05:56+08:00</updated>
+ <updated>2013-07-01T14:54:12+08:00</updated>
  <id>http://wangpengfly.github.com</id>
  <author>
    <name>wpandveil</name>
@@ -17,11 +17,11 @@
    <link href="http://wangpengfly.github.com/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/链表中倒数第K个节点</id>
-   <content type="html">&lt;h2 id='id83'&gt;题目&lt;/h2&gt;
+   <content type="html">&lt;h2 id='id84'&gt;题目&lt;/h2&gt;
 
 &lt;p&gt;给出一个单链表的头节点，写一个函数获得其倒数第K个节点&lt;/p&gt;
 
-&lt;h2 id='id84'&gt;解答&lt;/h2&gt;
+&lt;h2 id='id85'&gt;解答&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。&lt;/li&gt;
@@ -29,7 +29,7 @@
 &lt;li&gt;优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id='id85'&gt;代码&lt;/h2&gt;
+&lt;h2 id='id86'&gt;代码&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 2
@@ -55,7 +55,7 @@ ListNode *getKthNodeFromTail(ListNode *phead, int k)
 	return pEnd;
 }&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id='id86'&gt;测试用例&lt;/h2&gt;
+&lt;h2 id='id87'&gt;测试用例&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;//test
 /*********************************
@@ -77,15 +77,15 @@ int main()
    <link href="http://wangpengfly.github.com/2013/07/01/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/反转链表</id>
-   <content type="html">&lt;h2 id='id80'&gt;题目&lt;/h2&gt;
+   <content type="html">&lt;h2 id='id81'&gt;题目&lt;/h2&gt;
 
 &lt;p&gt;给定一个单链表的头节点指针，请反转该单链表，并返回反转之后的单链表的头节点指针&lt;/p&gt;
 
-&lt;h2 id='id81'&gt;解答&lt;/h2&gt;
+&lt;h2 id='id82'&gt;解答&lt;/h2&gt;
 
 &lt;p&gt;使用两个指针，反转链表，这个比较简单。&lt;/p&gt;
 
-&lt;h2 id='id82'&gt;代码&lt;/h2&gt;
+&lt;h2 id='id83'&gt;代码&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 3
@@ -113,15 +113,15 @@ ListNode *reverseList(ListNode *phead)
    <link href="http://wangpengfly.github.com/2013/07/01/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/从尾到头打印链表</id>
-   <content type="html">&lt;h2 id='id77'&gt;题目&lt;/h2&gt;
+   <content type="html">&lt;h2 id='id78'&gt;题目&lt;/h2&gt;
 
 &lt;p&gt;给定一个单链表的头节点，从尾到头打印出该链表的所有节点&lt;/p&gt;
 
-&lt;h2 id='id78'&gt;解答&lt;/h2&gt;
+&lt;h2 id='id79'&gt;解答&lt;/h2&gt;
 
 &lt;p&gt;* 使用递归，在递归中，若节点有后续节点，则先处理后续节点，再打印本节点的数据 * 递归的本质就是使用栈，所以可以不是用递归，而是在遍历链表的时候将链表数据压入栈中，遍历结束之后出栈就可以得到从尾到头的所有节点值&lt;/p&gt;
 
-&lt;h2 id='id79'&gt;代码&lt;/h2&gt;
+&lt;h2 id='id80'&gt;代码&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 1
@@ -153,6 +153,45 @@ void printListFromTail_2(ListNode *phead)
 		myStack.pop();
 	}
 }&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>七八月份的个人规划</title>
+   <link href="http://wangpengfly.github.com/2013/07/01/%E4%B8%83%E5%85%AB%E6%9C%88%E4%BB%BD%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92.html"/>
+   <updated>2013-07-01T00:00:00+08:00</updated>
+   <id>http://wangpengfly.github.com/2013/07/01/七八月份的个人规划</id>
+   <content type="html">&lt;h2 id='id77'&gt;目标&lt;/h2&gt;
+
+&lt;p&gt;* 至少每日一篇笔试面试题的博文 * 完成以下书单的复习：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    操作系统：
+        《现代操作系统》
+    算法与数据结构：
+        《算法导论》
+    数据库：
+        基本sql语言的复习
+    网络：
+        《计算机网络》
+        《TCP/ip详解 卷1》部分TCP章节
+    C++语言：
+        《effective c++》
+        《more effective c++》
+        《STL源码剖析》
+        《深度探索C++对象模型》
+    笔试面试题：
+        《剑指offer》
+        《编程之美》
+        《carrer cup》
+        《编程珠玑》
+    专业相关：
+        《UNIX网络编程 卷1》
+        《UNIX环境高级编程》&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;完成libevent源码的阅读工作&lt;/li&gt;
+
+&lt;li&gt;加强锻炼，争取增重5斤&lt;/li&gt;
+&lt;/ul&gt;</content>
  </entry>
  
  <entry>
@@ -962,51 +1001,51 @@ using namespace std;
 
 void printArr(int *arr, int n)  
 {  
-	for(int i = 1; i &amp;lt;= n; i++)  
-	{  
-    	cout &amp;lt;&amp;lt; arr[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;  
-	}  
-	cout &amp;lt;&amp;lt; endl;  
+		for(int i = 1; i &amp;lt;= n; i++)  
+		{  
+    		cout &amp;lt;&amp;lt; arr[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;  
+		}  
+		cout &amp;lt;&amp;lt; endl;  
 }  
 
 //最关键的函数，建堆的时候该函数自低向上  
 void maxHeapify(int *arr, int n, int index)  
 {  
-	if(arr == NULL || index &amp;gt; n)  
-    	return;  
-	int maxIndex = index;  
-	int left = index * 2;  
-	int right = index * 2 + 1;  
-	if(left &amp;lt;= n &amp;amp;&amp;amp; arr[left] &amp;gt; arr[maxIndex])  
-    	maxIndex = left;  
-	if(right &amp;lt;= n &amp;amp;&amp;amp; arr[right] &amp;gt; arr[maxIndex])  
-    	maxIndex = right;  
+		if(arr == NULL || index &amp;gt; n)  
+    		return;  
+		int maxIndex = index;  
+		int left = index * 2;  
+		int right = index * 2 + 1;  
+		if(left &amp;lt;= n &amp;amp;&amp;amp; arr[left] &amp;gt; arr[maxIndex])  
+    		maxIndex = left;  
+		if(right &amp;lt;= n &amp;amp;&amp;amp; arr[right] &amp;gt; arr[maxIndex])  
+    		maxIndex = right;  
 
-	if(maxIndex != index)  
-	{  
-    	swap(arr[index], arr[maxIndex]);  
-    	maxHeapify(arr, n, maxIndex);  
-	}  
+		if(maxIndex != index)  
+		{  
+    		swap(arr[index], arr[maxIndex]);  
+    		maxHeapify(arr, n, maxIndex);  
+		}  
 }  
 
 void makeHeap(int *arr, int n)  
 {  
-	for(int i = n / 2; i &amp;gt;= 1; i--)  
-	{  
-    	maxHeapify(arr, n, i);  
-	}  
+		for(int i = n / 2; i &amp;gt;= 1; i--)  
+		{  
+    		maxHeapify(arr, n, i);  
+		}  
 }  
 
 void heapSort(int *arr, int n)  
 {  
-	makeHeap(arr, n);  
-	printArr(arr, 10);  
-	for(int i = 1; i &amp;lt; n; i++)  
-	{  
-    	swap(arr[1], arr[n - i + 1]);  
-    	maxHeapify(arr, n - i, 1);  
-    	printArr(arr, 10);  
-	}  
+		makeHeap(arr, n);  
+		printArr(arr, 10);  
+		for(int i = 1; i &amp;lt; n; i++)  
+		{  
+    		swap(arr[1], arr[n - i + 1]);  
+    		maxHeapify(arr, n - i, 1);  
+    		printArr(arr, 10);  
+		}  
 }  &lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  
