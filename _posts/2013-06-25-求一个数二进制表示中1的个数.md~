@@ -1,0 +1,69 @@
+---
+layout: post
+title: 求二进制表示中1的个数
+description: 
+category: 面试笔试题
+tags: [每日一题]
+---
+{% include JB/setup %}
+
+## 题目 
+给定一个整型数据N，求数N的二进制表示中的1的个数
+
+## 解答
+用1与N做与运算，可以检查N的最右位是否为1，将1左移一位，与N做与运算可以检查N的倒数第二最右位是否为1，同理检查N的所有位。若N为32位，则需要检查32次。
+
+N与N-1做与运算，N的最右一个为1的位将会变为0，按照这个思路编程，直到N为0，检查的次数为1的个数。例如二进制10110减1为10101，做与运算结果为10100，最右的1变为0
+
+## 代码
+
+	#include <iostream>  
+	using namespace std;  
+  
+	//solution 1  
+	int numberof1_1(int n)  
+	{  
+    	int count = 0;  
+    	int one = 1;  
+    	for(int i = 0; i < 32; i++)  
+    	{  
+    	    if((n & one) > 0)  
+    	        count++;  
+    	    one << 1;  
+    	}  
+    	return count;  
+	}  
+  
+	//solution 2  
+	int numberof1_2(int n)  
+	{  
+    	int count = 0;  
+    	while(n)  
+    	{  
+    	    count++;  
+    	    n = n & (n - 1);  
+    	}  
+    	return count;  
+	}  
+  
+  
+	//test  
+	/*********************************** 
+	test number: 	
+	1 
+	100 
+	-1 
+	-100 
+	0 
+	***********************************/  
+	int main()  
+	{  
+    	int num;  
+    	while(1)  
+    	{  
+    	    cin >> num;  
+    	    cout << numberof1_1(num) << endl;  
+    	    cout << numberof1_2(num) << endl;  
+    	}  
+    	return 0;  
+	}  
