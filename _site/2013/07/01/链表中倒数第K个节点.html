@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>页面 | wpandveil</title>
+    <title>链表中倒数第K个节点 | wpandveil</title>
     
     
     <meta name="author" content="wpandveil">
@@ -100,88 +100,93 @@
 
       <div class="content">
         
-<div class="row page">
-  <div class="span12">
-    <h1 class="title">页面 </h1>
+<div class="row post">
+  <div class="span8">
+    <h1 class="title">链表中倒数第K个节点</h1>
+    <h2 id='id83'>题目</h2>
+
+<p>给出一个单链表的头节点，写一个函数获得其倒数第K个节点</p>
+
+<h2 id='id84'>解答</h2>
+
+<ol>
+<li>最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。</li>
+
+<li>优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点</li>
+</ol>
+
+<h2 id='id85'>代码</h2>
+
+<pre><code>/*******************************************************
+**question 2
+********************************************************/
+ListNode *getKthNodeFromTail(ListNode *phead, int k)
+{
+	if(phead == NULL || k &lt;= 0) return NULL;
+	ListNode *pBegin = phead;
+	ListNode *pEnd = phead;
+	for(int i = 0; i &lt; k - 1; i++)
+	{
+		if(pBegin-&gt;next != NULL)
+			pBegin = pBegin-&gt;next;
+		else
+			return NULL;
+	}
+
+	while(pBegin-&gt;next != NULL)
+	{
+		pBegin = pBegin-&gt;next;
+		pEnd = pEnd-&gt;next;
+	}
+	return pEnd;
+}</code></pre>
+
+<h2 id='id86'>测试用例</h2>
+
+<pre><code>//test
+/*********************************
+arr[10] = {....} k = 10
+arr[10] = {....} k = 1
+arr[10] = {....} k = 5
+**********************************/
+int main()
+{
+	int arr[1] = {1};
+	ListNode *phead = makeList(arr, 1);
+	getKthNodeFromTail(phead, 1);
+	return 0;
+}</code></pre>
+    <ul class="pager">
     
+      <li class="previous"><a href="/2013/07/01/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8.html" title="反转链表">&larr; 反转链表</a></li>
+    
+    
+    </ul>
+    
+  </div>
+  
+  <div class="span4 sidebar">
+    <h4 class="date">发布日期：<span>01 July 2013</span></h4>
 
-<h2>All Pages</h2>
-<ul>
-
-
+  
+    <h4>标签</h4>
+    <ul class="tag_box">
+    
+    
 
 
   
-    
-      
-      	
-      	<li><a href="/atom.xml">订阅</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/index.html">index</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">分类</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/404.html">页面不存在</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">标签</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">页面</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">归档</a></li>
-      	
-      
+     
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+     
+    	<li><a href="/tags.html#链表-ref">链表 <span>3</span></a></li>
     
   
 
 
 
-
-</ul>
-
+    </ul>
+    
   </div>
 </div>
 

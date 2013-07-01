@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>小飞的电梯调度 | wpandveil</title>
+    
+    
+    <meta name="author" content="wpandveil">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">wpandveil</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">归档</a></li>
+      	
+      
+    
+  
+
+
+
+
+
+          </ul>
+
+          <span class="pull-right slogan"> wpandveil </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="row post">
+  <div class="span8">
+    <h1 class="title">小飞的电梯调度</h1>
+    <h2 id='id39'>题目</h2>
+
+<p>（编程之美 1.8）一栋楼有6层，现在设计一种电梯调度算法：电梯在一楼让大家上电梯，然后根据大家选择要到的楼层算出某一楼层i，电梯在i层停下让所有人下电梯，然后大家爬楼梯达到自己的楼层。请问电梯停在哪一层，可以使得这一次的所有乘客爬楼层之和最短？</p>
+
+<h2 id='id40'>解答</h2>
+
+<p>最简单的想法就是遍历每一层，依次求出每一层所有人爬楼总和，总和最小的那一层即是答案，这样的话时间复杂度就是<code>O（N * N）</code>。</p>
+
+<p>另一种做法就是：假设停在i层，有N1个人在i层之下，N2个人在i层，N3个人在i层之上，若电梯停在i + 1层，则爬楼层总和需要增加 N1 + N2 - N3层，若N1 + N2 - N3小于0，则i + 1层爬楼总和更小。所以按照这个思路，时间复杂度为<code>O（N）</code></p>
+
+<h2 id='id41'>注意</h2>
+
+<p>偏离最小值楼层越多的楼层，总爬楼层数越大，所以一旦i + 1层所爬楼层总数大于i层，就不需要往上继续找了。</p>
+
+<h2 id='id42'>代码</h2>
+
+<pre><code>#include &lt;iostream&gt;  
+using namespace std;  
+
+int elevator(int *person, int n)  
+{  
+	int minFloor = 0;  
+	int targetFloor = 1;  
+	int N1 = 0;  
+	int N2 = person[1];  
+	int N3 = 0;  
+	for(int i = 2; i &lt; n; i++)  
+	{  
+    	N3 += person[i];  
+    	minFloor = person[i] * (i - 1);  
+	}  
+
+	for(int i = 2; i &lt; n; i++)  
+	{  
+    	if(N1 + N2 &lt; N3)  
+    	{  
+        	targetFloor = i;  
+        	minFloor += (N1 + N2 - N3);  
+        	N1 += N2;  
+        	N2 = person[i];  
+        	N3 -= person[i];  
+    	}  
+    	else  
+        	break;  
+	}  
+
+	return targetFloor;  
+}  
+
+//test  
+int main()  
+{  
+	int person[7] = {0, 1, 2, 3, 2, 1, 2};  
+	cout &lt;&lt; elevator(person, 7) &lt;&lt; endl;  
+	return 0;  
+}  </code></pre>
+    <ul class="pager">
+    
+      <li class="previous"><a href="/2013/06/24/%E7%AD%9B%E6%B3%95%E6%B1%82N%E4%BB%A5%E5%86%85%E6%89%80%E6%9C%89%E8%B4%A8%E6%95%B0.html" title="筛法求N以内所有质数">&larr; 筛法求N以内所有质数</a></li>
+    
+    
+      <li class="next"><a href="/2013/06/25/%E6%B1%82%E4%B8%80%E4%B8%AA%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0.html" title="求二进制表示中1的个数">求二进制表示中1的个数&rarr;</a></li>
+    
+    </ul>
+    
+  </div>
+  
+  <div class="span4 sidebar">
+    <h4 class="date">发布日期：<span>25 June 2013</span></h4>
+
+  
+    <h4>标签</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; <a href="mailto:wpandveil@gmail.com">wpandveil</a> 2012. 
+          Proudly powered by <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

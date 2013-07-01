@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>wpandveil</title>
+    <title>堆排序 | wpandveil</title>
     
     
     <meta name="author" content="wpandveil">
@@ -100,71 +100,92 @@
 
       <div class="content">
         
-
-
 <div class="row post">
   <div class="span8">
-    <h1 class="title"><a href="/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html" title="链表中倒数第K个节点">链表中倒数第K个节点</a> </h1>
-    <h2 id='id83'>题目</h2>
+    <h1 class="title">堆排序</h1>
+    <h2 id='id1'>题目</h2>
 
-<p>给出一个单链表的头节点，写一个函数获得其倒数第K个节点</p>
+<p>使用堆排序对数组进行排序</p>
 
-<h2 id='id84'>解答</h2>
+<h2 id='id2'>解答</h2>
+
+<p>堆排序（这里使用最大堆）的步骤是：</p>
 
 <ol>
-<li>最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。</li>
+<li>使用maxHeapify函数对数组自底向上建堆</li>
 
-<li>优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点</li>
+<li>将堆首第一个元素移到堆后，然后再使用maxHeapify生成新堆，堆的长度减1</li>
+
+<li>循环进行2，只到堆的长度为1</li>
+
+<li>堆排序的时间复杂度为<code>O(n * logn)</code>，是<code>不稳定排序</code>。</li>
 </ol>
 
-<h2 id='id85'>代码</h2>
+<h2 id='id3'>代码</h2>
 
-<pre><code>/*******************************************************
-**question 2
-********************************************************/
-ListNode *getKthNodeFromTail(ListNode *phead, int k)
-{
-	if(phead == NULL || k &lt;= 0) return NULL;
-	ListNode *pBegin = phead;
-	ListNode *pEnd = phead;
-	for(int i = 0; i &lt; k - 1; i++)
-	{
-		if(pBegin-&gt;next != NULL)
-			pBegin = pBegin-&gt;next;
-		else
-			return NULL;
-	}
+<pre><code>#include &lt;iostream&gt;  
+#include &lt;algorithm&gt;  
+using namespace std;  
 
-	while(pBegin-&gt;next != NULL)
-	{
-		pBegin = pBegin-&gt;next;
-		pEnd = pEnd-&gt;next;
-	}
-	return pEnd;
-}</code></pre>
+void printArr(int *arr, int n)  
+{  
+	for(int i = 1; i &lt;= n; i++)  
+	{  
+    	cout &lt;&lt; arr[i] &lt;&lt; &quot;\t&quot;;  
+	}  
+	cout &lt;&lt; endl;  
+}  
 
-<h2 id='id86'>测试用例</h2>
+//最关键的函数，建堆的时候该函数自低向上  
+void maxHeapify(int *arr, int n, int index)  
+{  
+	if(arr == NULL || index &gt; n)  
+    	return;  
+	int maxIndex = index;  
+	int left = index * 2;  
+	int right = index * 2 + 1;  
+	if(left &lt;= n &amp;&amp; arr[left] &gt; arr[maxIndex])  
+    	maxIndex = left;  
+	if(right &lt;= n &amp;&amp; arr[right] &gt; arr[maxIndex])  
+    	maxIndex = right;  
 
-<pre><code>//test
-/*********************************
-arr[10] = {....} k = 10
-arr[10] = {....} k = 1
-arr[10] = {....} k = 5
-**********************************/
-int main()
-{
-	int arr[1] = {1};
-	ListNode *phead = makeList(arr, 1);
-	getKthNodeFromTail(phead, 1);
-	return 0;
-}</code></pre>
+	if(maxIndex != index)  
+	{  
+    	swap(arr[index], arr[maxIndex]);  
+    	maxHeapify(arr, n, maxIndex);  
+	}  
+}  
+
+void makeHeap(int *arr, int n)  
+{  
+	for(int i = n / 2; i &gt;= 1; i--)  
+	{  
+    	maxHeapify(arr, n, i);  
+	}  
+}  
+
+void heapSort(int *arr, int n)  
+{  
+	makeHeap(arr, n);  
+	printArr(arr, 10);  
+	for(int i = 1; i &lt; n; i++)  
+	{  
+    	swap(arr[1], arr[n - i + 1]);  
+    	maxHeapify(arr, n - i, 1);  
+    	printArr(arr, 10);  
+	}  
+}  </code></pre>
     <ul class="pager">
-      <li class="next"><a href="/archive.html" title="所有文章">查看所有文章 &rarr;</a></li>
+    
+    
+      <li class="next"><a href="/2013/06/24/right-rotate-array.html" title="循环右移数组">循环右移数组&rarr;</a></li>
+    
     </ul>
+    
   </div>
-
+  
   <div class="span4 sidebar">
-    <h4 class="date">发布日期：<span>01 July 2013</span></h4>
+    <h4 class="date">发布日期：<span>24 June 2013</span></h4>
 
   
     <h4>标签</h4>
@@ -177,7 +198,7 @@ int main()
      
     	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
      
-    	<li><a href="/tags.html#链表-ref">链表 <span>3</span></a></li>
+    	<li><a href="/tags.html#排序-ref">排序 <span>1</span></a></li>
     
   
 

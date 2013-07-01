@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>求序列的全排列 | wpandveil</title>
+    
+    
+    <meta name="author" content="wpandveil">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">wpandveil</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">归档</a></li>
+      	
+      
+    
+  
+
+
+
+
+
+          </ul>
+
+          <span class="pull-right slogan"> wpandveil </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="row post">
+  <div class="span8">
+    <h1 class="title">求序列的全排列</h1>
+    <h2 id='id59'>题目</h2>
+
+<p>给定一个序列，求出其全排列，并保证有序。例如字符串123的全排列是123,132,213,231,312,321。</p>
+
+<h3 id='id60'>解答</h3>
+
+<h3 id='id61'>递归解法。</h3>
+
+<p>从第一个数开始的每一个数字与其后面的数字交换。如果序列中存在重复数据，比如122，则在交换之前看两个交换数字之间有没有与下标比较大的交换数字相等的数字，如果有的话，则不交换。比如122中，1与第二个2交换，发现中间有一个2，所以不交换，因为它们即使交换，得到的排列是221，但是1与第一个2交换得到了212可以进一步通过交换获得221.</p>
+
+<h3 id='id62'>非递归解法，使用字典序算法。</h3>
+
+<p>基本思路是：</p>
+
+<pre><code>对于输入的字典许排列&lt;a1,a2,…,an&gt;，反向查找第一对满足`a[j]` &lt; `a[j+1]` 的下标j
+仍旧反向查找一个下标k，使得 `a[j]`&lt;`a[k]`并且`a[k]`=min{`a[t]` | any t, `a[j]`&lt;`a[t]`}
+交换`a[j]`和`a[k]`
+反转`a[j+1..n]`  </code></pre>
+
+<h2 id='id63'>代码</h2>
+
+<pre><code>#include &lt;iostream&gt;  
+#include &lt;algorithm&gt;  
+using namespace std;  
+
+//防止产生重复排列  
+bool canSwap(char *arr, int begin, int end)  
+{  
+	char v = arr[end];  
+	for(int i = begin; i &lt; end; i++)  
+	{  
+	    if(arr[i] == v)  
+	        return false;  
+	}  
+	return true;  
+}  
+
+//递归解法  
+void AllRange(char *arr, int k, int m)  
+{  
+	if(k == m)  
+	{  
+	    printf(&quot;%s\n&quot;, arr);  
+	}  
+	else  
+	{  
+	    for(int i = k; i &lt;= m; i++)  
+	    {  
+	        if(canSwap(arr, k, i))  
+	        {  
+	            swap(arr[k], arr[i]);  
+	            AllRange(arr, k + 1, m);  
+	            swap(arr[k], arr[i]);  
+	        }  
+	    }  
+	}  
+}  
+
+//非递归解法，字典序算法  
+bool getNext(char *arr, int n)  
+{  
+	if(arr == NULL || n &lt;= 1)  
+	    return false;  
+	int j = n - 2;  
+	while(j &gt;= 0 &amp;&amp; arr[j] &gt;= arr[j + 1])  
+	{  
+	    j--;  
+	}  
+	if(j &lt; 0)  
+	    return false;  
+
+	int i = n - 1;  
+	while(arr[j] &gt;= arr[i] &amp;&amp; i &gt; j)  
+	{  
+	    i--;  
+	}  
+
+	swap(arr[i], arr[j]);  
+	while(j + 1 &lt; n - 1)  
+	{  
+	    swap(arr[j + 1], arr[n - 1]);  
+	    j++;  
+	    n--;  
+	}  
+	return true;  
+}  
+
+//测试  
+int main()  
+{  
+	//char arr[4] = &quot;111&quot;;  
+	//char arr[4] = &quot;123&quot;;  
+	//char arr[4] = &quot;122&quot;;  
+	char arr[4] = &quot;321&quot;;  
+	cout &lt;&lt; &quot;递归结果：&quot; &lt;&lt; endl;  
+	AllRange(arr, 0, 2);  
+
+	cout &lt;&lt; &quot;非递归结果：&quot; &lt;&lt; endl;  
+	sort(arr, arr + 3);  
+	cout &lt;&lt; arr &lt;&lt; endl;  
+	while(getNext(arr, 3))  
+	{  
+	    cout &lt;&lt; arr &lt;&lt; endl;  
+	}  
+
+	return 0;  
+}  </code></pre>
+    <ul class="pager">
+    
+      <li class="previous"><a href="/2013/06/25/%E6%B1%82%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E6%89%80%E6%9C%89%E6%AD%A3%E6%95%B4%E6%95%B0%E9%87%8C%E9%9D%A2%E5%8C%85%E5%90%AB%E7%9A%841%E7%9A%84%E4%B8%AA%E6%95%B0.html" title="小于等于N的所有正整数中包含的1的个数">&larr; 小于等于N的所有正整数中包含的1的个数</a></li>
+    
+    
+      <li class="next"><a href="/2013/06/25/%E7%BC%96%E5%86%99%E6%AD%A3%E7%A1%AE%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html" title="编写正确的二分查找算法">编写正确的二分查找算法&rarr;</a></li>
+    
+    </ul>
+    
+  </div>
+  
+  <div class="span4 sidebar">
+    <h4 class="date">发布日期：<span>25 June 2013</span></h4>
+
+  
+    <h4>标签</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+     
+    	<li><a href="/tags.html#全排列-ref">全排列 <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; <a href="mailto:wpandveil@gmail.com">wpandveil</a> 2012. 
+          Proudly powered by <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+

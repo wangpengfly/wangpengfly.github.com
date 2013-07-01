@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>页面 | wpandveil</title>
+    <title>反转链表 | wpandveil</title>
     
     
     <meta name="author" content="wpandveil">
@@ -100,88 +100,71 @@
 
       <div class="content">
         
-<div class="row page">
-  <div class="span12">
-    <h1 class="title">页面 </h1>
+<div class="row post">
+  <div class="span8">
+    <h1 class="title">反转链表</h1>
+    <h2 id='id80'>题目</h2>
+
+<p>给定一个单链表的头节点指针，请反转该单链表，并返回反转之后的单链表的头节点指针</p>
+
+<h2 id='id81'>解答</h2>
+
+<p>使用两个指针，反转链表，这个比较简单。</p>
+
+<h2 id='id82'>代码</h2>
+
+<pre><code>/*******************************************************
+**question 3
+********************************************************/
+ListNode *reverseList(ListNode *phead)
+{
+	if(phead == NULL) return NULL;
+	if(phead-&gt;next == NULL) return phead;
+	ListNode *pBegin = phead-&gt;next;
+	ListNode *pEnd = phead;
+	pEnd-&gt;next = NULL;
+	do
+	{
+		ListNode *pTemp = pBegin-&gt;next;
+		pBegin-&gt;next = pEnd;
+		pEnd = pBegin;
+		pBegin = pTemp;
+	}while(pBegin != NULL);
+	return pEnd;
+}</code></pre>
+    <ul class="pager">
+    
+      <li class="previous"><a href="/2013/07/01/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8.html" title="从尾到头打印链表">&larr; 从尾到头打印链表</a></li>
+    
+    
+      <li class="next"><a href="/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html" title="链表中倒数第K个节点">链表中倒数第K个节点&rarr;</a></li>
+    
+    </ul>
+    
+  </div>
+  
+  <div class="span4 sidebar">
+    <h4 class="date">发布日期：<span>01 July 2013</span></h4>
+
+  
+    <h4>标签</h4>
+    <ul class="tag_box">
+    
     
 
-<h2>All Pages</h2>
-<ul>
-
-
-
 
   
-    
-      
-      	
-      	<li><a href="/atom.xml">订阅</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/index.html">index</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/sitemap.txt">Sitemap</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/categories.html">分类</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/404.html">页面不存在</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/tags.html">标签</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li class="active"><a href="/pages.html" class="active">页面</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/archive.html">归档</a></li>
-      	
-      
+     
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+     
+    	<li><a href="/tags.html#链表-ref">链表 <span>3</span></a></li>
     
   
 
 
 
-
-</ul>
-
+    </ul>
+    
   </div>
 </div>
 

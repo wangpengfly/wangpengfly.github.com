@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>wpandveil</title>
+    <title>筛法求N以内所有质数 | wpandveil</title>
     
     
     <meta name="author" content="wpandveil">
@@ -100,71 +100,96 @@
 
       <div class="content">
         
-
-
 <div class="row post">
   <div class="span8">
-    <h1 class="title"><a href="/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html" title="链表中倒数第K个节点">链表中倒数第K个节点</a> </h1>
-    <h2 id='id83'>题目</h2>
+    <h1 class="title">筛法求N以内所有质数</h1>
+    <h2 id='id31'>题目</h2>
 
-<p>给出一个单链表的头节点，写一个函数获得其倒数第K个节点</p>
+<p>打印出给定数N以内的所有质数</p>
 
-<h2 id='id84'>解答</h2>
+<h2 id='id32'>解答</h2>
 
-<ol>
-<li>最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。</li>
+<p>使用筛法求N以内的所有质数</p>
 
-<li>优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点</li>
-</ol>
+<h2 id='id33'>注意</h2>
 
-<h2 id='id85'>代码</h2>
+<p>使用<code>bitmap</code>可以减少使用的空间，降低空间复杂度</p>
 
-<pre><code>/*******************************************************
-**question 2
-********************************************************/
-ListNode *getKthNodeFromTail(ListNode *phead, int k)
-{
-	if(phead == NULL || k &lt;= 0) return NULL;
-	ListNode *pBegin = phead;
-	ListNode *pEnd = phead;
-	for(int i = 0; i &lt; k - 1; i++)
-	{
-		if(pBegin-&gt;next != NULL)
-			pBegin = pBegin-&gt;next;
-		else
-			return NULL;
-	}
+<h2 id='id34'>代码</h2>
 
-	while(pBegin-&gt;next != NULL)
-	{
-		pBegin = pBegin-&gt;next;
-		pEnd = pEnd-&gt;next;
-	}
-	return pEnd;
-}</code></pre>
+<pre><code>#include &lt;iostream&gt;  
+#include &lt;string.h&gt;  
+using namespace std;  
 
-<h2 id='id86'>测试用例</h2>
+#define MAX 5000  
 
-<pre><code>//test
-/*********************************
-arr[10] = {....} k = 10
-arr[10] = {....} k = 1
-arr[10] = {....} k = 5
-**********************************/
-int main()
-{
-	int arr[1] = {1};
-	ListNode *phead = makeList(arr, 1);
-	getKthNodeFromTail(phead, 1);
-	return 0;
-}</code></pre>
+int array[MAX];//使用bitmap  
+
+void setArray(int i)//设置bitmap位  
+{  
+	array[i / 32] = array[i / 32] | (0x0001 &lt;&lt; (i % 32));  
+}  
+
+void clrArray(int i)//清楚bitmap位  
+{  
+	array[i / 32] = array[i / 32] ^ (0x0001 &lt;&lt; (i % 32));  
+}  
+
+bool checkArray(int i)//检查某位是不是存在数  
+{  
+	if(array[i / 32] &amp; (0x0001 &lt;&lt; (i % 32)))  
+	    return true;  
+	return false;  
+}  
+
+void getNum(int num)//筛法  
+{  
+	if(num &lt; 2)  
+	    return;  
+
+	for(int i = 2; i &lt;= num; i++)  
+	    setArray(i);  
+
+	for(int i = 2; i &lt;=num; i++)  
+	{  
+	    if(checkArray(i))  
+	    {  
+	        for(int j = i; j &lt;= num / i; j++)  
+	        {  
+	            if(checkArray(i * j))  
+	                clrArray(i * j);  
+	        }  
+	    }  
+	}  
+}  
+
+int main()  
+{  
+	int num;  
+	while(1)  
+	{  
+	    cin &gt;&gt; num;  
+	    getNum(num);  
+	    for(int i = 2; i &lt;= num; i++)  
+	        if(checkArray(i))  
+	            cout &lt;&lt; i &lt;&lt; &quot; &quot;;  
+	    cout &lt;&lt; endl;  
+	}  
+	return 0;  
+}  </code></pre>
     <ul class="pager">
-      <li class="next"><a href="/archive.html" title="所有文章">查看所有文章 &rarr;</a></li>
+    
+      <li class="previous"><a href="/2013/06/24/%E6%8C%89%E5%B1%82%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91.html" title="按层遍历二叉树">&larr; 按层遍历二叉树</a></li>
+    
+    
+      <li class="next"><a href="/2013/06/25/%E5%B0%8F%E9%A3%9E%E7%9A%84%E7%94%B5%E6%A2%AF%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95.html" title="小飞的电梯调度">小飞的电梯调度&rarr;</a></li>
+    
     </ul>
+    
   </div>
-
+  
   <div class="span4 sidebar">
-    <h4 class="date">发布日期：<span>01 July 2013</span></h4>
+    <h4 class="date">发布日期：<span>24 June 2013</span></h4>
 
   
     <h4>标签</h4>
@@ -176,8 +201,6 @@ int main()
   
      
     	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
-     
-    	<li><a href="/tags.html#链表-ref">链表 <span>3</span></a></li>
     
   
 
