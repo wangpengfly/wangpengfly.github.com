@@ -4,7 +4,7 @@
  <title>wpandveil</title>
  <link href="http://wangpengfly.github.com/atom.xml" rel="self"/>
  <link href="http://wangpengfly.github.com"/>
- <updated>2013-07-01T20:35:47+08:00</updated>
+ <updated>2013-07-07T22:49:34+08:00</updated>
  <id>http://wangpengfly.github.com</id>
  <author>
    <name>wpandveil</name>
@@ -13,15 +13,180 @@
 
  
  <entry>
+   <title>部分排序集合</title>
+   <link href="http://wangpengfly.github.com/2013/07/04/%E9%83%A8%E5%88%86%E6%8E%92%E5%BA%8F%E9%9B%86%E5%90%88.html"/>
+   <updated>2013-07-04T00:00:00+08:00</updated>
+   <id>http://wangpengfly.github.com/2013/07/04/部分排序集合</id>
+   <content type="html">&lt;h3 id='id88'&gt;快速排序&lt;/h3&gt;
+
+&lt;h4 id='id89'&gt;说明&lt;/h4&gt;
+
+&lt;p&gt;快排最关键的部分在partion部分。时间复杂度是O（N * logN）。&lt;/p&gt;
+
+&lt;h4 id='id90'&gt;代码&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;//非随机快速排序
+void quickSort(int *a, int begin, int end)
+{
+	if(begin &amp;gt;= end)
+		return;
+
+	/*partion begin*/
+	int key = a[end];
+	int i = begin - 1;
+	int j = begin;
+	for(int k = 0 ; k &amp;lt; end - begin + 1; k++)
+	{
+		if(a[j] &amp;lt; key)
+		{
+			if(j - i &amp;gt; 1)
+			{
+				int temp = a[j];
+				a[j] = a[i + 1];
+				a[i + 1] = temp;
+			}
+			else
+				i++;
+		}
+		j++;
+	}
+
+	int temp = a[i + 1];
+	a[i + 1] = a[end];
+	a[end] = temp;
+	/*partion end*/
+
+	if(i &amp;gt;= begin)
+		quickSort(a, begin, i);
+	if(i + 2 &amp;lt;= end)
+		quickSort(a, i + 2, end);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='id91'&gt;插入排序&lt;/h3&gt;
+
+&lt;h4 id='id92'&gt;说明&lt;/h4&gt;
+
+&lt;p&gt;插入排序可以在原地排序。时间复杂度是O（N * N）。&lt;/p&gt;
+
+&lt;h4 id='id93'&gt;代码&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;//插入排序
+void insertSort(int *a, int n)
+{
+	for(int i = 1; i &amp;lt; n; i++)
+	{
+		int value = a[i];
+		int j = i - 1;
+		while(j &amp;gt;= 0 &amp;amp;&amp;amp; a[j] &amp;gt; value)
+		{
+			a[j + 1] = a[j];
+			j--;
+		}
+		a[j + 1] = value;
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='id94'&gt;冒泡排序&lt;/h3&gt;
+
+&lt;h4 id='id95'&gt;说明&lt;/h4&gt;
+
+&lt;p&gt;冒泡排序自己之前一直不是很清楚，这一次写代码总于清楚了，之前一直写成插入排序&lt;/p&gt;
+
+&lt;h4 id='id96'&gt;代码&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;//冒泡排序
+void bubbleSort(int *a, int n)
+{
+	for(int i = 0; i &amp;lt; n; i++)
+	{
+		for(int j = 0; j &amp;lt; n - i - 1; j++)
+		{
+			if(a[j] &amp;gt; a[j + 1])
+			{
+				int temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
+}&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>归并排序</title>
+   <link href="http://wangpengfly.github.com/2013/07/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.html"/>
+   <updated>2013-07-04T00:00:00+08:00</updated>
+   <id>http://wangpengfly.github.com/2013/07/04/归并排序</id>
+   <content type="html">&lt;h3 id='id85'&gt;题目&lt;/h3&gt;
+
+&lt;p&gt;写一个归并排序，对数组进行排序&lt;/p&gt;
+
+&lt;h3 id='id86'&gt;解答&lt;/h3&gt;
+
+&lt;p&gt;归并排序算是比较简单的，解答见代码&lt;/p&gt;
+
+&lt;h3 id='id87'&gt;代码&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdlib&amp;gt;
+#include &amp;lt;string&amp;gt;
+using namespace std;
+
+void mergeSort(int *a, int begin, int end)
+{
+	if(begin &amp;gt;= end)
+ 		return;
+  	int mid = begin + (end - begin) / 2;
+  	mergeSort(a, begin, mid);
+  	mergeSort(a, mid + 1, end);
+  	int *b = (int *)malloc((end - begin + 1) * sizeof(int));
+  	int i = begin;
+  	int j = mid + 1;
+  	for(int k = 0; k &amp;lt; end - begin + 1; k++)
+  	{
+		if(i &amp;gt; mid)
+	  	{
+			  b[k] = a[j++];
+			  continue;
+	  	}
+	  	if(j &amp;gt; end)
+	  	{
+			  b[k] = a[i++];
+			  continue;
+	  	}
+	  	if(a[i] &amp;lt; a[j])
+			  b[k] = a[i++];
+	  	else
+			  b[k] = a[j++]; 
+  	}
+
+  	for(int k = 0; k &amp;lt; end - begin + 1; k++)
+  	{
+		  a[begin + k] = b[k];
+  	}
+  	free(b);
+}
+
+int main()
+{
+	int a[10] = {1, 3, 2, 4, 7, 5, 6, 9, 8, 0};
+	mergeSort(a, 0, 9);
+  	for(int i = 0; i &amp;lt; 10; i++)
+		cout &amp;lt;&amp;lt; a[i] &amp;lt;&amp;lt; endl;
+  	return 0;
+}&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>链表中倒数第K个节点</title>
    <link href="http://wangpengfly.github.com/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/链表中倒数第K个节点</id>
-   <content type="html">&lt;h3 id='id85'&gt;题目&lt;/h3&gt;
+   <content type="html">&lt;h3 id='id81'&gt;题目&lt;/h3&gt;
 
 &lt;p&gt;给出一个单链表的头节点，写一个函数获得其倒数第K个节点&lt;/p&gt;
 
-&lt;h3 id='id86'&gt;解答&lt;/h3&gt;
+&lt;h3 id='id82'&gt;解答&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。&lt;/li&gt;
@@ -29,7 +194,7 @@
 &lt;li&gt;优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id='id87'&gt;代码&lt;/h3&gt;
+&lt;h3 id='id83'&gt;代码&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 2
@@ -55,7 +220,7 @@ ListNode *getKthNodeFromTail(ListNode *phead, int k)
 	return pEnd;
 }&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id='id88'&gt;测试用例&lt;/h3&gt;
+&lt;h3 id='id84'&gt;测试用例&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;//test
 /*********************************
@@ -77,15 +242,15 @@ int main()
    <link href="http://wangpengfly.github.com/2013/07/01/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/反转链表</id>
-   <content type="html">&lt;h3 id='id82'&gt;题目&lt;/h3&gt;
+   <content type="html">&lt;h3 id='id78'&gt;题目&lt;/h3&gt;
 
 &lt;p&gt;给定一个单链表的头节点指针，请反转该单链表，并返回反转之后的单链表的头节点指针&lt;/p&gt;
 
-&lt;h3 id='id83'&gt;解答&lt;/h3&gt;
+&lt;h3 id='id79'&gt;解答&lt;/h3&gt;
 
 &lt;p&gt;使用两个指针，反转链表，这个比较简单。&lt;/p&gt;
 
-&lt;h3 id='id84'&gt;代码&lt;/h3&gt;
+&lt;h3 id='id80'&gt;代码&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 3
@@ -113,15 +278,15 @@ ListNode *reverseList(ListNode *phead)
    <link href="http://wangpengfly.github.com/2013/07/01/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/07/01/从尾到头打印链表</id>
-   <content type="html">&lt;h3 id='id79'&gt;题目&lt;/h3&gt;
+   <content type="html">&lt;h3 id='id75'&gt;题目&lt;/h3&gt;
 
 &lt;p&gt;给定一个单链表的头节点，从尾到头打印出该链表的所有节点&lt;/p&gt;
 
-&lt;h3 id='id80'&gt;解答&lt;/h3&gt;
+&lt;h3 id='id76'&gt;解答&lt;/h3&gt;
 
 &lt;p&gt;1. 使用递归，在递归中，若节点有后续节点，则先处理后续节点，再打印本节点的数据 2. 递归的本质就是使用栈，所以可以不是用递归，而是在遍历链表的时候将链表数据压入栈中，遍历结束之后出栈就可以得到从尾到头的所有节点值&lt;/p&gt;
 
-&lt;h3 id='id81'&gt;代码&lt;/h3&gt;
+&lt;h3 id='id77'&gt;代码&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;/*******************************************************
 **question 1
@@ -156,21 +321,29 @@ void printListFromTail_2(ListNode *phead)
  </entry>
  
  <entry>
-   <title>七八月个人规划</title>
-   <link href="http://wangpengfly.github.com/2013/07/01/%E4%B8%83%E5%85%AB%E6%9C%88%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92.html"/>
+   <title>个人规划(201307-201309)</title>
+   <link href="http://wangpengfly.github.com/2013/07/01/%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92%28201307-201309%29.html"/>
    <updated>2013-07-01T00:00:00+08:00</updated>
-   <id>http://wangpengfly.github.com/2013/07/01/七八月个人规划</id>
-   <content type="html">&lt;h3 id='id77'&gt;个人要求&lt;/h3&gt;
+   <id>http://wangpengfly.github.com/2013/07/01/个人规划(201307-201309)</id>
+   <content type="html">&lt;h3 id='id73'&gt;个人要求&lt;/h3&gt;
 
-&lt;p&gt;1. 至少每天一篇博文 2. 完成以下书单&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;至少每天一篇博文&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完成以下书单&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完成libevent的源码阅读&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;加强锻炼，争取增重5斤&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ol&gt;
-&lt;li&gt;完成libevent的源码阅读&lt;/li&gt;
-
-&lt;li&gt;加强锻炼，争取增重5斤&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id='id78'&gt;数单&lt;/h3&gt;
+&lt;h3 id='id74'&gt;书单&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;操作系统：&lt;/p&gt;
@@ -178,41 +351,53 @@ void printListFromTail_2(ListNode *phead)
 &lt;blockquote&gt;
 &lt;p&gt;《现代操作系统》&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;算法与数据结构：&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;《算法导论》&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;数据库：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;基本sql语言的复习&lt;/p&gt;
+&lt;p&gt;基本&lt;code&gt;sql&lt;/code&gt;语言的复习&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;网络：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;《计算机网络》 《TCP/ip详解 卷1》部分TCP章节&lt;/p&gt;
+&lt;p&gt;《计算机网络》&lt;br /&gt;《TCP/ip详解 卷1》部分TCP章节&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;C++语言：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;《effective c++》 《more effective c++》 《STL源码剖析》 《深度探索C++对象模型》&lt;/p&gt;
+&lt;p&gt;《effective c++》 &lt;br /&gt;《more effective c++》&lt;br /&gt;《STL源码剖析》 &lt;br /&gt;《深度探索C++对象模型》&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;笔试面试题：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;《剑指offer》 《编程之美》 《carrer cup》 《编程珠玑》&lt;/p&gt;
+&lt;p&gt;《剑指offer》&lt;br /&gt;《编程之美》&lt;br /&gt;《carrer cup》&lt;br /&gt;《编程珠玑》&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;专业相关：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;《UNIX网络编程 卷1》 《UNIX环境高级编程》&lt;/p&gt;
+&lt;p&gt;《UNIX网络编程 卷1》&lt;br /&gt;《UNIX环境高级编程》&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/blockquote&gt;</content>
  </entry>
@@ -222,21 +407,21 @@ void printListFromTail_2(ListNode *phead)
    <link href="http://wangpengfly.github.com/2013/06/25/%E7%BC%96%E5%86%99%E6%AD%A3%E7%A1%AE%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95.html"/>
    <updated>2013-06-25T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/06/25/编写正确的二分查找算法</id>
-   <content type="html">&lt;h3 id='id69'&gt;题目&lt;/h3&gt;
+   <content type="html">&lt;h3 id='id65'&gt;题目&lt;/h3&gt;
 
 &lt;p&gt;（编程之美 3.11）编写一个正确的二分查找算法，对一个升序的数组进行排序，若数组中有多个一样的，则返回下标最大的那个。&lt;/p&gt;
 
-&lt;h3 id='id70'&gt;解答&lt;/h3&gt;
+&lt;h3 id='id66'&gt;解答&lt;/h3&gt;
 
 &lt;p&gt;二分查找是一个最基本的算法，但是编写一个正确的二分查找算法还是不太容易，因为一步小心就容易造成一些小错误。《编程珠玑》第四章就专门介绍了“二分搜索的挑战”。&lt;/p&gt;
 
 &lt;p&gt;如何返回下标最大的那个值的下标？只要保证在比较的时候，先比较&lt;code&gt;value&lt;/code&gt;是不是比以&lt;code&gt;mid&lt;/code&gt;为下标的元素的值大，总是优先让begin赋值为mid。最后当&lt;code&gt;begin == end - 1&lt;/code&gt;的时候，也总是先比较&lt;code&gt;arr[end]&lt;/code&gt;与&lt;code&gt;value&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id='id71'&gt;注意&lt;/h3&gt;
+&lt;h3 id='id67'&gt;注意&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;mid = （begin + end）/ 2&lt;/code&gt;可能造成溢出，所以使用&lt;code&gt;mid = begin + （end - begin） / 2&lt;/code&gt;代替 需要仔细设计测试用例，保证不会进入死循环&lt;/p&gt;
 
-&lt;h3 id='id72'&gt;代码&lt;/h3&gt;
+&lt;h3 id='id68'&gt;代码&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;  
 using namespace std;  
@@ -308,24 +493,43 @@ int main()
    <id>http://wangpengfly.github.com/2013/06/25/求序列的全排列</id>
    <content type="html">&lt;h3 id='id59'&gt;题目&lt;/h3&gt;
 
-&lt;p&gt;给定一个序列，求出其全排列，并保证有序。例如字符串123的全排列是123,132,213,231,312,321。&lt;/p&gt;
+&lt;p&gt;给定一个序列，求出其全排列，并保证有序。例如字符串123的全排列是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;123,132,213,231,312,321。&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id='id60'&gt;解答&lt;/h3&gt;
 
-&lt;h4 id='id61'&gt;递归解法。&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;递归解法。&lt;/p&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;从第一个数开始的每一个数字与其后面的数字交换。如果序列中存在重复数据，比如122，则在交换之前看两个交换数字之间有没有与下标比较大的交换数字相等的数字，如果有的话，则不交换。比如122中，1与第二个2交换，发现中间有一个2，所以不交换，因为它们即使交换，得到的排列是221，但是1与第一个2交换得到了212可以进一步通过交换获得221.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 
-&lt;h4 id='id62'&gt;非递归解法，使用字典序算法。&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;非递归解法，使用字典序算法。&lt;/p&gt;
 
+&lt;blockquote&gt;
 &lt;p&gt;基本思路是：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 
-&lt;pre&gt;&lt;code&gt;对于输入的字典许排列&amp;lt;a1,a2,…,an&amp;gt;，反向查找第一对满足`a[j]` &amp;lt; `a[j+1]` 的下标j
-仍旧反向查找一个下标k，使得 `a[j]`&amp;lt;`a[k]`并且`a[k]`=min{`a[t]` | any t, `a[j]`&amp;lt;`a[t]`}
-交换`a[j]`和`a[k]`
-反转`a[j+1..n]`  &lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;对于输入的字典许排列&lt;code&gt;&amp;lt;a1,a2,…,an&amp;gt;&lt;/code&gt;，反向查找第一对满足&lt;code&gt;a[j]&lt;/code&gt; &amp;lt; &lt;code&gt;a[j+1]&lt;/code&gt; 的下标j&lt;/li&gt;
 
-&lt;h3 id='id63'&gt;代码&lt;/h3&gt;
+&lt;li&gt;仍旧反向查找一个下标k，使得 &lt;code&gt;a[j]&lt;/code&gt;&amp;lt;&lt;code&gt;a[k]&lt;/code&gt;并且&lt;code&gt;a[k]&lt;/code&gt;=min{&lt;code&gt;a[t]&lt;/code&gt; | any t, &lt;code&gt;a[j]&lt;/code&gt;&amp;lt;&lt;code&gt;a[t]&lt;/code&gt;}&lt;/li&gt;
+
+&lt;li&gt;交换&lt;code&gt;a[j]&lt;/code&gt;和&lt;code&gt;a[k]&lt;/code&gt;&lt;/li&gt;
+
+&lt;li&gt;反转&lt;code&gt;a[j+1..n]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id='id61'&gt;代码&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;  
 #include &amp;lt;algorithm&amp;gt;  
@@ -835,7 +1039,7 @@ int main()
  </entry>
  
  <entry>
-   <title>前序遍历和中序遍历求二叉树</title>
+   <title>二叉树的前序遍历和中序遍历求二叉树</title>
    <link href="http://wangpengfly.github.com/2013/06/24/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E5%92%8C%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B1%82%E4%BA%8C%E5%8F%89%E6%A0%91.html"/>
    <updated>2013-06-24T00:00:00+08:00</updated>
    <id>http://wangpengfly.github.com/2013/06/24/二叉树的前序遍历和中序遍历求二叉树</id>
@@ -884,21 +1088,21 @@ void buildTree(char *pPreOrder, char *pInOrder, int len, Node **pRoot)
 
 	while(*pLeftEnd != *pPreOrder)  
 	{  
-	    if(pLeftEnd == 0 || pPreOrder == 0)  
-	        break;  
-	    if(templen++ &amp;gt; len)  
-	        break;  
-	    pLeftEnd++;  
+    	if(pLeftEnd == 0 || pPreOrder == 0)  
+    	    break;  
+    	if(templen++ &amp;gt; len)  
+        	break;  
+    	pLeftEnd++;  
 	}  
 
 	int nleftlen = (int)(pLeftEnd - pInOrder);  
 	int nrightlen = (int)(len - nleftlen - 1);  
 
 	if(nleftlen &amp;gt; 0)  
-	    buildTree(pPreOrder + 1, pInOrder, nleftlen, &amp;amp;((*pRoot)-&amp;gt;left));  
+    	buildTree(pPreOrder + 1, pInOrder, nleftlen, &amp;amp;((*pRoot)-&amp;gt;left));  
 	if(nrightlen &amp;gt; 0)  
-	    buildTree(pPreOrder + nleftlen + 1, pInOrder + nleftlen  + 1,  
-	        nrightlen, &amp;amp;((*pRoot)-&amp;gt;right));  
+    	buildTree(pPreOrder + nleftlen + 1, pInOrder + nleftlen  + 1,  
+        nrightlen, &amp;amp;((*pRoot)-&amp;gt;right));  
 }  
 
 void postOrderOutput(Node *proot)  

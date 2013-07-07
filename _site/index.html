@@ -46,14 +46,6 @@
   
     
       
-    
-  
-    
-      
-    
-  
-    
-      
       	
       	<li><a href="/categories.html">分类</a></li>
       	
@@ -66,9 +58,9 @@
   
     
       
-      	
-      	<li><a href="/tags.html">标签</a></li>
-      	
+    
+  
+    
       
     
   
@@ -80,6 +72,14 @@
       
       	
       	<li><a href="/archive.html">归档</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
       	
       
     
@@ -104,59 +104,99 @@
 
 <div class="row post">
   <div class="span8">
-    <h1 class="title"><a href="/2013/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACK%E4%B8%AA%E8%8A%82%E7%82%B9.html" title="链表中倒数第K个节点">链表中倒数第K个节点</a> </h1>
-    <h3 id='id85'>题目</h3>
+    <h1 class="title"><a href="/2013/07/04/%E9%83%A8%E5%88%86%E6%8E%92%E5%BA%8F%E9%9B%86%E5%90%88.html" title="部分排序集合">部分排序集合</a> </h1>
+    <h3 id='id88'>快速排序</h3>
 
-<p>给出一个单链表的头节点，写一个函数获得其倒数第K个节点</p>
+<h4 id='id89'>说明</h4>
 
-<h3 id='id86'>解答</h3>
+<p>快排最关键的部分在partion部分。时间复杂度是O（N * logN）。</p>
 
-<ol>
-<li>最简单的做法是：先遍历链表，获得链表的长度n，然后再次遍历链表，从头节点开始的第n - K + 1即是所求节点。</li>
+<h4 id='id90'>代码</h4>
 
-<li>优化一下的做法是：使用两个指针，一个先向前遍历K 个节点，另外一个指着头节点，然后两个指针一起向前遍历链表直到链表结尾。这时后面一个节点所指的就是倒数第K个节点</li>
-</ol>
-
-<h3 id='id87'>代码</h3>
-
-<pre><code>/*******************************************************
-**question 2
-********************************************************/
-ListNode *getKthNodeFromTail(ListNode *phead, int k)
+<pre><code>//非随机快速排序
+void quickSort(int *a, int begin, int end)
 {
-	if(phead == NULL || k &lt;= 0) return NULL;
-	ListNode *pBegin = phead;
-	ListNode *pEnd = phead;
-	for(int i = 0; i &lt; k - 1; i++)
+	if(begin &gt;= end)
+		return;
+
+	/*partion begin*/
+	int key = a[end];
+	int i = begin - 1;
+	int j = begin;
+	for(int k = 0 ; k &lt; end - begin + 1; k++)
 	{
-		if(pBegin-&gt;next != NULL)
-			pBegin = pBegin-&gt;next;
-		else
-			return NULL;
+		if(a[j] &lt; key)
+		{
+			if(j - i &gt; 1)
+			{
+				int temp = a[j];
+				a[j] = a[i + 1];
+				a[i + 1] = temp;
+			}
+			else
+				i++;
+		}
+		j++;
 	}
 
-	while(pBegin-&gt;next != NULL)
-	{
-		pBegin = pBegin-&gt;next;
-		pEnd = pEnd-&gt;next;
-	}
-	return pEnd;
+	int temp = a[i + 1];
+	a[i + 1] = a[end];
+	a[end] = temp;
+	/*partion end*/
+
+	if(i &gt;= begin)
+		quickSort(a, begin, i);
+	if(i + 2 &lt;= end)
+		quickSort(a, i + 2, end);
 }</code></pre>
 
-<h3 id='id88'>测试用例</h3>
+<h3 id='id91'>插入排序</h3>
 
-<pre><code>//test
-/*********************************
-arr[10] = {....} k = 10
-arr[10] = {....} k = 1
-arr[10] = {....} k = 5
-**********************************/
-int main()
+<h4 id='id92'>说明</h4>
+
+<p>插入排序可以在原地排序。时间复杂度是O（N * N）。</p>
+
+<h4 id='id93'>代码</h4>
+
+<pre><code>//插入排序
+void insertSort(int *a, int n)
 {
-	int arr[1] = {1};
-	ListNode *phead = makeList(arr, 1);
-	getKthNodeFromTail(phead, 1);
-	return 0;
+	for(int i = 1; i &lt; n; i++)
+	{
+		int value = a[i];
+		int j = i - 1;
+		while(j &gt;= 0 &amp;&amp; a[j] &gt; value)
+		{
+			a[j + 1] = a[j];
+			j--;
+		}
+		a[j + 1] = value;
+	}
+}</code></pre>
+
+<h3 id='id94'>冒泡排序</h3>
+
+<h4 id='id95'>说明</h4>
+
+<p>冒泡排序自己之前一直不是很清楚，这一次写代码总于清楚了，之前一直写成插入排序</p>
+
+<h4 id='id96'>代码</h4>
+
+<pre><code>//冒泡排序
+void bubbleSort(int *a, int n)
+{
+	for(int i = 0; i &lt; n; i++)
+	{
+		for(int j = 0; j &lt; n - i - 1; j++)
+		{
+			if(a[j] &gt; a[j + 1])
+			{
+				int temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
 }</code></pre>
     <ul class="pager">
       <li class="next"><a href="/archive.html" title="所有文章">查看所有文章 &rarr;</a></li>
@@ -164,7 +204,7 @@ int main()
   </div>
 
   <div class="span4 sidebar">
-    <h4 class="date">发布日期：<span>01 July 2013</span></h4>
+    <h4 class="date">发布日期：<span>04 July 2013</span></h4>
 
   
     <h4>标签</h4>
@@ -175,9 +215,9 @@ int main()
 
   
      
-    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>15</span></a></li>
      
-    	<li><a href="/tags.html#链表-ref">链表 <span>3</span></a></li>
+    	<li><a href="/tags.html#排序-ref">排序 <span>3</span></a></li>
     
   
 

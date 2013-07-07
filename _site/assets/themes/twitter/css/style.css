@@ -62,12 +62,6 @@ html, body {
   margin-top: 36px;
 }
 
-.pager a {
-  border: none;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-}
 h1.title {
   margin-bottom: 20px;
   padding-bottom: 10px;

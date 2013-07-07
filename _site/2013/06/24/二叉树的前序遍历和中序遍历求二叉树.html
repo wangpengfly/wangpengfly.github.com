@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>前序遍历和中序遍历求二叉树 | wpandveil</title>
+    <title>二叉树的前序遍历和中序遍历求二叉树 | wpandveil</title>
     
     
     <meta name="author" content="wpandveil">
@@ -46,14 +46,6 @@
   
     
       
-    
-  
-    
-      
-    
-  
-    
-      
       	
       	<li><a href="/categories.html">分类</a></li>
       	
@@ -66,9 +58,9 @@
   
     
       
-      	
-      	<li><a href="/tags.html">标签</a></li>
-      	
+    
+  
+    
       
     
   
@@ -80,6 +72,14 @@
       
       	
       	<li><a href="/archive.html">归档</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
       	
       
     
@@ -102,7 +102,7 @@
         
 <div class="row post">
   <div class="span8">
-    <h1 class="title">前序遍历和中序遍历求二叉树</h1>
+    <h1 class="title">二叉树的前序遍历和中序遍历求二叉树</h1>
     <h3 id='id15'>题目</h3>
 
 <p>已知某一个二叉树的前序遍历和中序遍历，求该二叉树的后续遍历。</p>
@@ -148,21 +148,21 @@ void buildTree(char *pPreOrder, char *pInOrder, int len, Node **pRoot)
 
 	while(*pLeftEnd != *pPreOrder)  
 	{  
-	    if(pLeftEnd == 0 || pPreOrder == 0)  
-	        break;  
-	    if(templen++ &gt; len)  
-	        break;  
-	    pLeftEnd++;  
+    	if(pLeftEnd == 0 || pPreOrder == 0)  
+    	    break;  
+    	if(templen++ &gt; len)  
+        	break;  
+    	pLeftEnd++;  
 	}  
 
 	int nleftlen = (int)(pLeftEnd - pInOrder);  
 	int nrightlen = (int)(len - nleftlen - 1);  
 
 	if(nleftlen &gt; 0)  
-	    buildTree(pPreOrder + 1, pInOrder, nleftlen, &amp;((*pRoot)-&gt;left));  
+    	buildTree(pPreOrder + 1, pInOrder, nleftlen, &amp;((*pRoot)-&gt;left));  
 	if(nrightlen &gt; 0)  
-	    buildTree(pPreOrder + nleftlen + 1, pInOrder + nleftlen  + 1,  
-	        nrightlen, &amp;((*pRoot)-&gt;right));  
+    	buildTree(pPreOrder + nleftlen + 1, pInOrder + nleftlen  + 1,  
+        nrightlen, &amp;((*pRoot)-&gt;right));  
 }  
 
 void postOrderOutput(Node *proot)  
@@ -207,7 +207,7 @@ int main()
 
   
      
-    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>15</span></a></li>
      
     	<li><a href="/tags.html#二叉树-ref">二叉树 <span>2</span></a></li>
     

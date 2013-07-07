@@ -46,14 +46,6 @@
   
     
       
-    
-  
-    
-      
-    
-  
-    
-      
       	
       	<li><a href="/categories.html">分类</a></li>
       	
@@ -66,9 +58,9 @@
   
     
       
-      	
-      	<li><a href="/tags.html">标签</a></li>
-      	
+    
+  
+    
       
     
   
@@ -80,6 +72,14 @@
       
       	
       	<li><a href="/archive.html">归档</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
       	
       
     
@@ -103,21 +103,21 @@
 <div class="row post">
   <div class="span8">
     <h1 class="title">编写正确的二分查找算法</h1>
-    <h3 id='id69'>题目</h3>
+    <h3 id='id65'>题目</h3>
 
 <p>（编程之美 3.11）编写一个正确的二分查找算法，对一个升序的数组进行排序，若数组中有多个一样的，则返回下标最大的那个。</p>
 
-<h3 id='id70'>解答</h3>
+<h3 id='id66'>解答</h3>
 
 <p>二分查找是一个最基本的算法，但是编写一个正确的二分查找算法还是不太容易，因为一步小心就容易造成一些小错误。《编程珠玑》第四章就专门介绍了“二分搜索的挑战”。</p>
 
 <p>如何返回下标最大的那个值的下标？只要保证在比较的时候，先比较<code>value</code>是不是比以<code>mid</code>为下标的元素的值大，总是优先让begin赋值为mid。最后当<code>begin == end - 1</code>的时候，也总是先比较<code>arr[end]</code>与<code>value</code>。</p>
 
-<h3 id='id71'>注意</h3>
+<h3 id='id67'>注意</h3>
 
 <p><code>mid = （begin + end）/ 2</code>可能造成溢出，所以使用<code>mid = begin + （end - begin） / 2</code>代替 需要仔细设计测试用例，保证不会进入死循环</p>
 
-<h3 id='id72'>代码</h3>
+<h3 id='id68'>代码</h3>
 
 <pre><code>#include &lt;iostream&gt;  
 using namespace std;  
@@ -185,7 +185,7 @@ int main()
       <li class="previous"><a href="/2013/06/25/%E6%B1%82%E5%BA%8F%E5%88%97%E7%9A%84%E5%85%A8%E6%8E%92%E5%88%97.html" title="求序列的全排列">&larr; 求序列的全排列</a></li>
     
     
-      <li class="next"><a href="/2013/07/01/%E4%B8%83%E5%85%AB%E6%9C%88%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92.html" title="七八月个人规划">七八月个人规划&rarr;</a></li>
+      <li class="next"><a href="/2013/07/01/%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92%28201307-201309%29.html" title="个人规划(201307-201309)">个人规划(201307-201309)&rarr;</a></li>
     
     </ul>
     
@@ -203,7 +203,7 @@ int main()
 
   
      
-    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>13</span></a></li>
+    	<li><a href="/tags.html#每日一题-ref">每日一题 <span>15</span></a></li>
      
     	<li><a href="/tags.html#二分查找-ref">二分查找 <span>1</span></a></li>
     
